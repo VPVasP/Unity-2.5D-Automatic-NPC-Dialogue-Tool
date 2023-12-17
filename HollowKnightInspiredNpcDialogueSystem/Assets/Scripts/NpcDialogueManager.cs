@@ -25,11 +25,11 @@ public class NpcDialogueManager : MonoBehaviour
     public AudioClip[] audioClips;
     private AudioSource audioSource;
     private int currentSentence = 0;
-    public Vector3 pressButtonScale = new Vector3(0.01f, 0.01f, 0.01f);
-    public Vector3 pressButtonPosition = Vector3.zero;
+    public Vector3 pressButtonScale;
+    public Vector3 pressButtonPosition;
     public Vector2 pressButtonSize = new Vector2(200f, 50f);
-    public Vector3 talkTextScale = new Vector3(0.01f, 0.01f, 0.01f);
-    public Vector3 talkTextPosition = new Vector3(0f, 2.5f, 0f);
+    public Vector3 talkTextScale;
+    public Vector3 talkTextPosition;
     public Vector2 talkTextSize = new Vector2(1057.101f, 106f);
 
     private void Start()
@@ -50,6 +50,11 @@ public class NpcDialogueManager : MonoBehaviour
         listenText.font = fontChoice;
         pressButtonText.SetActive(false);
         talkObject.SetActive(false);
+        pressButtonScale = new Vector3(0.01f, 0.01f, 0.01f);
+        pressButtonPosition=  new Vector3(0.01f, 0.01f, 0.01f);
+        talkTextScale = new Vector3(0.01f, 0.01f, 0.01f);
+        talkTextPosition= new Vector3(0f, 2.5f, 0f);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -103,8 +108,7 @@ public class NpcDialogueManager : MonoBehaviour
                 talkText.maxVisibleCharacters = currentLetter;
                 isAnimating = false;
             }
-            else
-            {
+            
                 if (currentSentence < sentences.Length - 1)
                 {
                     
@@ -121,7 +125,7 @@ public class NpcDialogueManager : MonoBehaviour
                     isTalking = false;
                 }
             }
-        }
+        
 
        
         if (isAnimating)

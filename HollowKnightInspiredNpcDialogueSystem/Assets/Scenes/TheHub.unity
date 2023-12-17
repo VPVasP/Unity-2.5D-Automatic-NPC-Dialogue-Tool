@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.013962174, g: 0.07175972, b: 0.09959307, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1497,22 +1497,20 @@ MonoBehaviour:
   listenText: {fileID: 0}
   talkText: {fileID: 0}
   canvas: {fileID: 2341716669699982575}
-  desiredFontAsset: {fileID: 11400000, guid: 1a0d8d0274be15544a9c1de8fc9cc832, type: 2}
+  fontChoice: {fileID: 11400000, guid: 269344d99e9a0a644b6bf45da4453e1b, type: 2}
   letterTimer: 0
-  currentLetterIndex: 0
-  currentSentexIndex: 0
+  currentLetter: 0
   isAnimating: 0
   audioClips:
   - {fileID: 8300000, guid: d2882e8f32565ae489967095854eb894, type: 3}
   - {fileID: 8300000, guid: 88a0a60ffe7fd0d41992e20705342303, type: 3}
   - {fileID: 8300000, guid: e64482cbf6c0c52458faf7f45dd19c5d, type: 3}
-  audioSource: {fileID: 0}
   pressButtonScale: {x: 0.01, y: 0.01, z: 0.01}
   pressButtonPosition: {x: 0, y: 0, z: 0}
-  pressButtonSizeDelta: {x: 200, y: 50}
+  pressButtonSize: {x: 200, y: 50}
   talkTextScale: {x: 0.01, y: 0.01, z: 0.01}
   talkTextPosition: {x: 0, y: 2.5, z: 0}
-  talkTextSizeDelta: {x: 1057.101, y: 106}
+  talkTextSize: {x: 1057.101, y: 106}
 --- !u!4 &2139872066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1714748972919986588, guid: 877b08f512178384dadca8cf28e31a7e, type: 3}
