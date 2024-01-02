@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class NpcDialogueManager : MonoBehaviour
 {
+    #region private fields
+    private AudioSource audioSource;
+    private int currentSentence = 0;
+    #endregion private fields
+    #region public fields
     public GameObject pressButtonText;
     public GameObject talkObject;
     public bool isInside;
@@ -23,17 +28,16 @@ public class NpcDialogueManager : MonoBehaviour
     public int currentLetter = 0;
     public bool isAnimating = false;
     public AudioClip[] audioClips;
-    private AudioSource audioSource;
-    private int currentSentence = 0;
     public Vector3 pressButtonScale;
     public Vector3 pressButtonPosition;
     public Vector2 pressButtonSize = new Vector2(200f, 50f);
     public Vector3 talkTextScale;
     public Vector3 talkTextPosition;
     public Vector2 talkTextSize = new Vector2(1057.101f, 106f);
-
+    #endregion public fields
     private void Start()
     {
+        //we find the player and set the canvas audiosource and ui elements
         player = GameObject.FindGameObjectWithTag("Player").transform;
         canvas = GetComponentInChildren<Canvas>();
         audioSource = GetComponent<AudioSource>();
@@ -43,6 +47,7 @@ public class NpcDialogueManager : MonoBehaviour
         talkText = talkObject.AddComponent<TextMeshProUGUI>();
         pressButtonText.transform.SetParent(canvas.transform, false);
         talkObject.transform.SetParent(canvas.transform, false);
+        //we set the scales and positions of our UI
         listenText.transform.localScale = pressButtonScale;
         listenText.transform.localPosition = pressButtonPosition;
         listenText.rectTransform.sizeDelta = pressButtonSize;
@@ -56,9 +61,10 @@ public class NpcDialogueManager : MonoBehaviour
         talkTextPosition= new Vector3(0f, 2.5f, 0f);
 
     }
-
+    #region triggers
     private void OnTriggerEnter(Collider other)
     {
+        //if the tag is player we are inside and we apply the UI
         if (other.CompareTag("Player"))
         {
             listenText.text = "-Listen-";
@@ -68,7 +74,7 @@ public class NpcDialogueManager : MonoBehaviour
             talkObject.transform.SetParent(canvas.transform, false);
         }
     }
-
+    //if we exit the trigger we are not inside
     private void OnTriggerExit(Collider other)
     {
         pressButtonText.SetActive(false);
@@ -76,11 +82,14 @@ public class NpcDialogueManager : MonoBehaviour
         isInside = false;
         isTalking = false; 
     }
+    #endregion triggers
 
     private void Update()
-    {
+    { 
+        //if we are inside and we press w
         if (isInside && Input.GetKeyDown(KeyCode.W))
         {
+            //we activate the correct UI and we set up the positions and scales and we rotate the player to face the NPC
             pressButtonText.SetActive(false);
             talkObject.SetActive(true);
             talkObject.transform.SetParent(canvas.transform, false);
@@ -97,7 +106,7 @@ public class NpcDialogueManager : MonoBehaviour
             currentSentence = 0;
             StartTextAnimation(npcName + sentences[currentSentence]);
         }
-
+        //the dialogue gets advanced 
         if (isTalking && Input.GetKeyDown(KeyCode.Z))
         {
             if (isAnimating) 
@@ -127,7 +136,7 @@ public class NpcDialogueManager : MonoBehaviour
             }
         
 
-       
+       //we continue the dialogue if we are still animating
         if (isAnimating)
         {
             
@@ -147,7 +156,7 @@ public class NpcDialogueManager : MonoBehaviour
             }
         }
     }
-
+    #region animationTexting
     private void StartTextAnimation(string sentence)
     {
     
@@ -160,3 +169,4 @@ public class NpcDialogueManager : MonoBehaviour
         talkText.SetText(sentence);
     }
 }
+#endregion animationTexting
