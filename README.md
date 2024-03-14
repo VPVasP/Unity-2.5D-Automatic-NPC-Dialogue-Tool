@@ -1,6 +1,6 @@
 # Unity NPC-Automatic Dialogue System 2.5D
 
-The NPC-Automatic  Dialogue System is a 2.5D Automatic Dialogue System inspired by Hollow Knight. This tool allows you to  implement endialogues within your Unity game like Hollow Knight, complete with customizable NPC names, sentences, audio clips, and texts.
+The NPC-Automatic  Dialogue System is a 2.5D Automatic Dialogue System inspired by Hollow Knight. This tool allows you to  implement dialogues within your Unity game like Hollow Knight, complete with customizable NPC names, sentences, audio clips, and texts.
 
 ## Features:
 
