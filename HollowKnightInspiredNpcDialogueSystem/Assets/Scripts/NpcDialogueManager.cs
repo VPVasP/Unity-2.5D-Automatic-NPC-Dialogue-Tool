@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,27 +36,42 @@ public class NpcDialogueManager : MonoBehaviour
     {
         //we find the player and set the canvas audiosource and ui elements
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        canvas = GetComponentInChildren<Canvas>();
         audioSource = GetComponent<AudioSource>();
         pressButtonText = new GameObject("Listen Text");
         talkObject = new GameObject("TalkText");
+        canvas = new GameObject("NPCCanvas").AddComponent<Canvas>();
+        canvas.transform.SetParent(transform, false);
+        Debug.Log("Canvas created: " + canvas.name);
+        canvas.renderMode = RenderMode.WorldSpace;
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+        canvasRect.localPosition = new Vector3(0f, 1.5f, 0f);
+        canvasRect.localRotation = Quaternion.Euler(0, 180, 0);
+        canvasRect.sizeDelta = new Vector2(800f, 600f);
+
         listenText = pressButtonText.AddComponent<TextMeshProUGUI>();
         talkText = talkObject.AddComponent<TextMeshProUGUI>();
+
+
+        listenText.transform.SetParent(canvas.transform, false);
+        talkText.transform.SetParent(canvas.transform, false);
+
         pressButtonText.transform.SetParent(canvas.transform, false);
         talkObject.transform.SetParent(canvas.transform, false);
+
         //we set the scales and positions of our UI
         listenText.transform.localScale = pressButtonScale;
-        listenText.transform.localPosition = pressButtonPosition;
+        listenText.transform.localPosition = new Vector3(0,1f,0);
         listenText.rectTransform.sizeDelta = pressButtonSize;
         listenText.alignment = TMPro.TextAlignmentOptions.Center;
         listenText.font = fontChoice;
         pressButtonText.SetActive(false);
         talkObject.SetActive(false);
-        pressButtonScale = new Vector3(0.01f, 0.01f, 0.01f);
-        pressButtonPosition=  new Vector3(0.01f, 0.01f, 0.01f);
+        pressButtonScale = new Vector3(0.01f, 0.05f, 0.01f);
+        pressButtonPosition=  new Vector3(0.01f, 0.05f, 0.01f);
         talkTextScale = new Vector3(0.01f, 0.01f, 0.01f);
         talkTextPosition= new Vector3(0f, 2.5f, 0f);
 
+        //canvas mode
     }
     #region triggers
     private void OnTriggerEnter(Collider other)
